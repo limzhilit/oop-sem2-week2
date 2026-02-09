@@ -28,4 +28,14 @@ public class RequestController {
     return new Person("Zelig", 20);
   }
 
+  @GetMapping("/calculate")
+  public String calculate(@RequestParam int num1, @RequestParam int num2, @RequestParam Operation operation) {
+    if (num2 == 0 && operation == Operation.DIVIDE) {
+      return "Error: Division by zero is not allowed.";
+    }
+    Calculator calculator = new Calculator(num1, num2, operation);
+    int result = calculator.calculate();
+    return "Result: " + result;
+  }
+
 }
